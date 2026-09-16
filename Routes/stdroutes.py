@@ -17,35 +17,35 @@ def GetStudent():
 
 
 @router.put("/edit/{roll}")
-def UpdateStudent(roll:int,student:updateStruct):
-    alldata = list(collection.find({},{"_id":0}))
+def UpdateStudent(roll: int, student: updateStruct):
+    alldata = list(collection.find({}, {"_id": 0}))
 
     updatedstudent = {}
 
     for i in alldata:
-        if i["roll"]==roll:
+        if i["roll"] == roll:
+            if student.name is not None:
+                updatedstudent["name"] = student.name
 
-            if student.name != None:
-                updatedstudent["name"]=student.name
-
-            if student.age != None:
+            if student.age is not None:
                 updatedstudent["age"] = student.age
 
-        collection.update_one(
-            {"roll":roll},
-            {"$set":updatedstudent}
-        )
+            collection.update_one(
+                {"roll": roll},
+                {"$set": updatedstudent}
+            )
 
-        return {"message":"student Updated"}
+            return {"message": "student Updated"}
+
+    return {"message": "student not found"}
 
 
 
 @router.delete("/delete/{roll}")
-def Deletstudent(roll:int):
-    alldata = list(collection.find({},{"_id":0}))
+def Deletstudent(roll: int):
+    result = collection.delete_one({"roll": roll})
 
-    for i in alldata:
-        if i["roll"]==roll:
-            collection.delete_one({"roll":roll})
-            return {"message":"student deleted"}
-    
+    if result.deleted_count == 1:
+        return {"message": "student deleted"}
+
+    return {"message": "student not found"}

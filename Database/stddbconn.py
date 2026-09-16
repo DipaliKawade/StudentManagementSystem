@@ -1,20 +1,15 @@
-# from pymongo import MongoClient
-
-# ConnectionString = MongoClient(
-#     "mongodb+srv://dipalikawade08_db_user:pd24r6xYxd0iW0V8@cluster1.mxawhza.mongodb.net/?appName=Cluster1"
-# )
-
-# Database = ConnectionString["Student123"]
-
-# Collection = Database["StudentInfo"]
-
-
+import os
+from dotenv import load_dotenv
 from pymongo import MongoClient
 
-ConnectionString = MongoClient(
-    "mongodb+srv://dipalikawade08_db_user:pd24r6xYxd0iW0V8@cluster1.mxawhza.mongodb.net/?appName=Cluster1"
-)
+load_dotenv()
+
+MONGO_URL = os.getenv("MONGO_URL")
+
+if not MONGO_URL:
+    raise ValueError("MONGO_URL is not set")
+
+ConnectionString = MongoClient(MONGO_URL)
 
 Database = ConnectionString["Student123"]
-
 collection = Database["StudentInfo"]
