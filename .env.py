@@ -1,1 +1,0 @@
-MongoDB_URL="mongodb+srv://dipalikawade08_db_user:pd24r6xYxd0iW0V8@cluster1.mxawhza.mongodb.net/?appName=Cluster1"
