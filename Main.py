@@ -9,7 +9,8 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://localhost:5174"
+        "http://localhost:5174",
+        "https://resilient-cajeta-e33cb4.netlify.app"
     ],
     allow_credentials=True,
     allow_methods=["*"],
